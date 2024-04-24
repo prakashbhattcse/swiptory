@@ -1,0 +1,60 @@
+:root{
+  --pink: #FF7373;
+  --blue: #73ABFF;
+  --black:#000000;
+  --white:#FFFFFF;
+}
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "DM Sans", sans-serif;
+}
+
+logo{
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.navbar{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px;
+
+}
+
+.navbarContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  padding: 1rem 0;
+}
+
+.btnGrp{
+  display: flex;
+  flex-direction: row;
+gap: 2rem;
+}
+
+.btn{
+  background-color: var(--pink);
+}
+
+.btn, .btn2{
+  padding: 1rem 2rem;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  font-weight: 700;
+  color: var(--white);
+  border-radius: 20px;
+}
+
+.btn2{
+  background-color: var(--blue);
+}
