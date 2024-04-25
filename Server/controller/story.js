@@ -15,26 +15,40 @@ const createStory = async (req, res) => {
 
 const getStories = async (req, res) => {
   try {
-    const stories = await Story.find().sort({ _id: -1 }); // get all stories sorted by _id in descending order
-    res.json(stories);
+    let selectedCategory = req.query.category || "";
+  
+    console.log(selectedCategory);    
+    const stories = await Story.find({}); // get all stories sorted by _id in descending order
+
+    if(selectedCategory === "all"){
+      const filtered = stories;
+      return   res.status(200).json({filtered});
+    }
+    const filtered = stories.filter((story)=>{
+      return  story.chips.some((category)=> category.category === selectedCategory);
+    })
+
+
+    res.status(200).json({filtered});
   } catch (error) {
     console.log(error);
-    res.json({ errorMessage: 'Something went wrong' });
+    res.status(404).json({ errorMessage: 'Something went wrong' });
   }
 };
+
 
 
 // Add this function
-const getUserStories = async (req, res) => {
-  try {
-    const stories = await Story.find({ userId: req.params.userId });
-    res.json(stories);
-  } catch (error) {
-    console.log(error);
-    res.json({ errorMessage: 'Something went wrong' });
-  }
-};
+// const getUserStories = async (req, res) => {
+//   try {
+//     const stories = await Story.find({ userId: req.params.userId });
+//     res.json(stories);
+//   } catch (error) {
+//     console.log(error);
+//     res.json({ errorMessage: 'Something went wrong' });
+//   }
+// };
 
-module.exports = { createStory, getStories, getUserStories }; // Export getUserStories
+module.exports = { createStory, getStories }; // Export getUserStories
 
 

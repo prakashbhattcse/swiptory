@@ -1,0 +1,1 @@
+export const DEFAULT_CATEGORIES = ["all" , "healthcare" , "food" , "travel" , "movies"]

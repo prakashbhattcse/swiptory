@@ -36,7 +36,7 @@ const Chip = ({ index, data, setData }) => {
       <select value={data[index].category} onChange={handleChange('category')}>
         <option value="">Select a category</option>
         <option value="food">Food</option>
-        <option value="health and fitness">Health and Fitness</option>
+        <option value="healthcare">Health and Fitness</option>
         <option value="travel">Travel</option>
         <option value="movies">Movies</option>
         <option value="education">Education</option>

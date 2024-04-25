@@ -77,7 +77,7 @@ const Navbar = ({ addStory }) => {
   return (
     <div className="navbar">
       <div className="navbarContainer">
-        <logo>SwipTory</logo>
+        <h1 className="logo">SwipTory</h1>
 
         {/* BEFORE LOGIN BUTONS */}
         {!isLogin ? (

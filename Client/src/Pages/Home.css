@@ -1,16 +1,13 @@
 .homeSection{
     width: 100%;
     display: flex;
-    align-items: center;
+
+   flex-direction: column;
     justify-content: center;
 }
 
-.homeSection .container{
+/* .homeSection .container{
     width: 12rem;
     height: 12rem;
-}
-
-.homeSection .container img{
-    width: 100%;
-}
+} */
 
