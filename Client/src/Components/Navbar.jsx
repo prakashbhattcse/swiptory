@@ -7,7 +7,7 @@ const Navbar = ({ addStory }) => {
 
 
   const [showRegisterModal, setShowRegisterModal] = useState(false);
-  const [showStoryModal, setStoryModal]= useState(false);
+  const [showStoryModal, setStoryModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const [userData, setUserData] = useState({ username: "" });
@@ -39,8 +39,8 @@ const Navbar = ({ addStory }) => {
       );
       console.log(response.errorMessage);
       localStorage.setItem("swipTorytoken", response.data.token);
-      console.log( localStorage.setItem("swipTorytoken", response.data.token) + " SWIP TORY TOKEN")
-      localStorage.setItem("userId", response.data.userId); 
+      console.log(localStorage.setItem("swipTorytoken", response.data.token) + " SWIP TORY TOKEN")
+      localStorage.setItem("userId", response.data.userId);
       console.log(localStorage.setItem("userId", response.data.userId) + " USER ID")
       if (!!response.data.token) {
         setIsLogin(true);
@@ -110,7 +110,7 @@ const Navbar = ({ addStory }) => {
         )}
       </div>
 
-     
+
       {showStoryModal && <AddStoryModal closeModal={() => setStoryModal(false)} addStory={addStory} username={userData.username} />}
       {showRegisterModal && (
         <UserForm

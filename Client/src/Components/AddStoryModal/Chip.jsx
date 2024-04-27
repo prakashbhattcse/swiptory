@@ -9,7 +9,7 @@ const Chip = ({ index, data, setData }) => {
 
 
   const handleChange = (field) => (event) => {
-   
+
     const newData = [...data];
     // Chip ko update kr dega at the current index with new value from input
     newData[index] = { ...newData[index], [field]: event.target.value };
@@ -29,18 +29,20 @@ const Chip = ({ index, data, setData }) => {
 
 
   return (
-    <div>
-      <input type="text" placeholder="Image URL" value={data[index].imageUrl} onChange={handleChange('imageUrl')} />
-      <input type="text" placeholder="Heading" value={data[index].heading} onChange={handleChange('heading')} />
-      <textarea placeholder="Description" value={data[index].description} onChange={handleChange('description')} />
-      <select value={data[index].category} onChange={handleChange('category')}>
+    <div className='chipInputs text'>
+      <label><span className='chipInputsLabel'>Heading :</span>
+        <input type="text" placeholder="Heading" value={data[index].heading} onChange={handleChange('heading')} /></label>
+      <label><span className='chipInputsLabel'>Description :</span> <textarea placeholder="Description" value={data[index].description} onChange={handleChange('description')}/></label>
+
+      <label><span className='chipInputsLabel'>Image :  </span>  <input type="text" placeholder="Image URL" value={data[index].imageUrl} onChange={handleChange('imageUrl')} /></label>
+      <label><span className='chipInputsLabel'>Category : </span>  <select value={data[index].category} onChange={handleChange('category')}>
         <option value="">Select a category</option>
         <option value="food">Food</option>
         <option value="healthcare">Health and Fitness</option>
         <option value="travel">Travel</option>
         <option value="movies">Movies</option>
         <option value="education">Education</option>
-      </select>
+      </select></label>
     </div>
   );
 };

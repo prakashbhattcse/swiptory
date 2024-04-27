@@ -41,14 +41,14 @@ const AddStoryModal = ({ closeModal, addStory, username }) => {
       } catch (error) {
         console.log(error);
       }
-  
+
       addStory(data);
       setData(Array(3).fill({ imageUrl: '', heading: '', description: '' }));
       setCurrentIndex(0);
       closeModal();
     }
   };
-  
+
 
 
   const handleNext = () => {
@@ -67,22 +67,28 @@ const AddStoryModal = ({ closeModal, addStory, username }) => {
   return (
     <div className="storyModalSection">
       <div className='container'>
-        {data.map((_, index) => (
-          <div key={index}>
-            <button onClick={() => setCurrentIndex(index)}>
-              Slide {index + 1}
-            </button>
-            {index > 2 && <button onClick={() => handleRemoveChip(index)}>X</button>}
-          </div>
-        ))}
-       
+
+        <div className="addbtns">
+          {data.map((_, index) => (
+            <div key={index} className='chipCross'>
+              <button onClick={() => setCurrentIndex(index)}>
+                Slide {index + 1}
+              </button>
+              {index > 2 && <button onClick={() => handleRemoveChip(index)} id='chipCrossBtn'>X</button>}
+            </div>
+          ))}
+          <button onClick={handleAddChip}>Add +</button>
+        </div>
+
         <Chip key={currentIndex} index={currentIndex} data={data} setData={setData} />
 
-
-        <button onClick={handlePrevious}>Previous</button>
-        <button onClick={handleNext}>Next</button>
-        <button onClick={handleAddChip}>Add+</button>
-        <button onClick={handlePost}>Post</button>
+        <div className="modalBtns">
+          <div style={{ display: "flex", gap: "1rem" }}>
+            <button onClick={handlePrevious} className='btn3'>Previous</button>
+            <button onClick={handleNext} className='btn2'>Next</button>
+          </div>
+          <button onClick={handlePost} className='btn'>Post</button>
+        </div>
         <button onClick={closeModal}>Close</button>
       </div>
     </div>
