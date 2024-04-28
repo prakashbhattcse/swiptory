@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserForm from "./UserForm/UserForm";
 import axios from "axios";
 import AddStoryModal from "./AddStoryModal/AddStoryModal";
+import {NavLink} from "react-router-dom";
 
 const Navbar = ({ addStory }) => {
 
@@ -9,12 +10,11 @@ const Navbar = ({ addStory }) => {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showStoryModal, setStoryModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(!!localStorage.getItem("swipTorytoken") || false);
   const [userData, setUserData] = useState({ username: "" });
   const [error, setError] = useState(null);
 
   const handleRegister = async (userData) => {
-
 
 
     console.log("Registering user:", userData);
@@ -37,11 +37,9 @@ const Navbar = ({ addStory }) => {
         "http://localhost:3000/auth/login",
         userData
       );
-      console.log(response.errorMessage);
       localStorage.setItem("swipTorytoken", response.data.token);
-      console.log(localStorage.setItem("swipTorytoken", response.data.token) + " SWIP TORY TOKEN")
       localStorage.setItem("userId", response.data.userId);
-      console.log(localStorage.setItem("userId", response.data.userId) + " USER ID")
+      localStorage.setItem("userBookmarks" , response.data.userBookmarks)
       if (!!response.data.token) {
         setIsLogin(true);
         setUserData({ username: userData.username });
@@ -60,6 +58,13 @@ const Navbar = ({ addStory }) => {
     setUserData({ username: "" });
   };
 
+  setTimeout(() => {
+    localStorage.removeItem("swipTorytoken");
+    localStorage.removeItem("userId");
+    setIsLogin(false);
+    setUserData({ username: "" });
+  }, 3600000 );
+
   const closeModal = () => {
     setShowRegisterModal(false);
     setShowLoginModal(false);
@@ -74,10 +79,11 @@ const Navbar = ({ addStory }) => {
   };
 
 
+
   return (
     <div className="navbar">
       <div className="navbarContainer">
-        <h1 className="logo">SwipTory</h1>
+        <NavLink to={"/"}><h1 className="logo">SwipTory</h1></NavLink>
 
         {/* BEFORE LOGIN BUTONS */}
         {!isLogin ? (
@@ -100,7 +106,11 @@ const Navbar = ({ addStory }) => {
 
           <div className="btnGrp">
             {/* AFTER LOGIN DATA */}
-
+            <NavLink to={"/bookmark"}>
+            <button className="btn login">
+              Bookmark
+            </button>     
+            </NavLink>
             <button className="btn" onClick={() => setStoryModal(true)}> Add Story</button>
             <button className="btn login" onClick={() => handleLogout()}>
               Logout

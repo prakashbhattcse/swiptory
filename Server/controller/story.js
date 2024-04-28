@@ -1,5 +1,7 @@
 // controller/story.js
 const Story = require('../models/story');
+const User = require('../models/user');
+var mongoose = require('mongoose');
 
 const createStory = async (req, res) => {
   try {
@@ -16,9 +18,7 @@ const createStory = async (req, res) => {
 const getStories = async (req, res) => {
   try {
     let selectedCategory = req.query.category || "";
-  
-    console.log(selectedCategory);    
-    const stories = await Story.find({}); // get all stories sorted by _id in descending order
+      const stories = await Story.find({}); // get all stories sorted by _id in descending order
 
     if(selectedCategory === "all"){
       const filtered = stories;
@@ -49,6 +49,56 @@ const getStories = async (req, res) => {
 //   }
 // };
 
-module.exports = { createStory, getStories }; // Export getUserStories
+
+const updateBookmark = async (req , res) => {
+  try {
+    let {postId , userId} = req.body;
+    await User.updateOne({_id : userId} , {$push : {bookmarks : new mongoose.Types.ObjectId(postId)}})
+
+  //  let user = await User.findOne({_id : userId});
+  //  let bookmarks = user.bookmarks; 
+    
+   res.status(200).json({message : "bookmark added..."})
+ 
+  } catch (error) {
+    res.status(500).json({error : "bookmark failed"})
+  }
+}
+
+const removeBookmark = async (req , res) => {
+  try {
+    let {postId , userId} = req.body;
+    await User.updateOne({_id : userId} , {$pull : {bookmarks : new mongoose.Types.ObjectId(postId)}})    
+     res.status(200).json({message : "bookmark removed..."})
+ 
+  } catch (error) {
+    res.status(500).json({error : "bookmark failed"})
+  }
+}
+
+const fetchBookmarks = async (req , res) => {
+  try {
+    let {userId} = req.params;
+
+    let user = await User.findOne({_id : userId});
+    let bookmarks = user?.bookmarks;
+    let stories =await Story.find({});
+    let userBookmarks = [];
+     bookmarks.forEach((curItem)=>{
+      stories.forEach((curstory)=>{
+        if(curstory._id.equals(curItem)){
+           userBookmarks.push(curstory);
+        }
+      })
+    })
+    res.status(200).json({bookmarks : userBookmarks});
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({error : "bookmark failed"})
+  }
+}
+
+module.exports = { createStory, getStories , updateBookmark , fetchBookmarks , removeBookmark}; // Export getUserStories
 
 

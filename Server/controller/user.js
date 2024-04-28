@@ -66,12 +66,12 @@ const loginUser = async (req, res) => {
       });
     }
 
-    let token = jwt.sign({userId : userDetails._id} , process.env.SECRET_CODE , {expiresIn : "5m"});
+    let token = jwt.sign({userId : userDetails._id} , process.env.SECRET_CODE , {expiresIn : "3h"});
 
   // Fetch the stories posted by the user
   const stories = await Story.find({ username });
 
-    res.json({ message: "User logged in successfully", username: userDetails.username , token : token, stories });
+    res.json({ message: "User logged in successfully", username: userDetails.username , token : token, userId : userDetails._id, userBookmarks : userDetails.bookmarks});
   } catch (error) {
     console.log(error);
     res.json({ errorMessage: "Something went wrong" });

@@ -11,6 +11,9 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        bookmarks : {
+            type: Array
+        }
     },
     { timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" } }
 );
