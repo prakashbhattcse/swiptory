@@ -39,6 +39,7 @@ const Navbar = ({ addStory }) => {
       );
       localStorage.setItem("swipTorytoken", response.data.token);
       localStorage.setItem("userId", response.data.userId);
+      localStorage.setItem("username", response.data.username);
       localStorage.setItem("userBookmarks" , response.data.userBookmarks)
       if (!!response.data.token) {
         setIsLogin(true);
@@ -54,6 +55,8 @@ const Navbar = ({ addStory }) => {
   const handleLogout = () => {
     localStorage.removeItem("swipTorytoken");
     localStorage.removeItem("userId");
+    localStorage.removeItem("username");
+    localStorage.removeItem("userBookmarks");
     setIsLogin(false);
     setUserData({ username: "" });
   };
@@ -83,7 +86,7 @@ const Navbar = ({ addStory }) => {
   return (
     <div className="navbar">
       <div className="navbarContainer">
-        <NavLink to={"/"}><h1 className="logo">SwipTory</h1></NavLink>
+        <NavLink to={"/"} style={{textDecoration:'none' , color:'black'}}><h1 className="logo">SwipTory</h1></NavLink>
 
         {/* BEFORE LOGIN BUTONS */}
         {!isLogin ? (

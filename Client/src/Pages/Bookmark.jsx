@@ -27,7 +27,7 @@ useEffect(()=>{
          <div style={{ display: "flex" }}>
                   {stories && stories.map((cur , index) => {
                       return (
-                        <div className="container" key={index} >
+                        <div className="cardDiv" key={index} >
                           <div className="card">
                             <div className="layer"></div>
                             <img

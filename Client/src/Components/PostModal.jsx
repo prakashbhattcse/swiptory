@@ -65,7 +65,7 @@ const PostModal = ({setShowPostModal , data}) => {
         <div className='box'>
         <div className='overlay'></div>
         <Stories
-			stories={data?.chips?.map((cur)=>{
+			stories={data && data?.chips?.map((cur)=>{
                 return{
                     url : cur?.imageUrl
                 }

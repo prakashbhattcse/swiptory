@@ -15,6 +15,18 @@ const createStory = async (req, res) => {
   }
 };
 
+const updatestory = async (req, res) => {
+  try {
+    const { data, username } = req.body;
+    await Story.updateOne({username} , {$set : {data}});
+    res.json({ message: 'Story updated successfully' });
+  } catch (error) {
+    console.log(error);
+    res.json({ errorMessage: 'Something went wrong' });
+  }
+};
+
+
 const getStories = async (req, res) => {
   try {
     let selectedCategory = req.query.category || "";
@@ -99,6 +111,6 @@ const fetchBookmarks = async (req , res) => {
   }
 }
 
-module.exports = { createStory, getStories , updateBookmark , fetchBookmarks , removeBookmark}; // Export getUserStories
+module.exports = { createStory, getStories , updateBookmark , fetchBookmarks , removeBookmark , updatestory}; // Export getUserStories
 
 

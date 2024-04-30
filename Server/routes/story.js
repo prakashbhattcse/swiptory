@@ -7,5 +7,7 @@ router.get('/', storyController.getStories);
 router.patch('/updateBookmark' , storyController.updateBookmark);
 router.patch('/removeBookmark' , storyController.removeBookmark);
 router.get('/getBookmarks/:userId' , storyController.fetchBookmarks);
+router.patch('/updatestory' , storyController.fetchBookmarks);
+
 
 module.exports = router;

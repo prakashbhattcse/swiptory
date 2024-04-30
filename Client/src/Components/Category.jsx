@@ -11,6 +11,7 @@ const Category = ({setCurCategory}) => {
     },[category])
 
   return (
+    <div className='catDiv'>
     <div className='categories'>
         {DEFAULT_CATEGORIES.map((cur , index)=>{
             return(
@@ -20,6 +21,7 @@ const Category = ({setCurCategory}) => {
                 </div>
             )
         })}
+        </div>
     </div>
   )
 }

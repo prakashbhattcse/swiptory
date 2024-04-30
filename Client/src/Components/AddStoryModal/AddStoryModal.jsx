@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Chip from './Chip';
 import axios from 'axios'; // add this line
 import "./AddStoryModal.css"
+import { IoMdCloseCircleOutline } from "react-icons/io";
 
 const AddStoryModal = ({ closeModal, addStory, username }) => {
   const [data, setData] = useState(Array(3).fill({ imageUrl: '', heading: '', description: '', category: '' }));
@@ -89,7 +90,7 @@ const AddStoryModal = ({ closeModal, addStory, username }) => {
           </div>
           <button onClick={handlePost} className='btn'>Post</button>
         </div>
-        <button onClick={closeModal}>Close</button>
+         <IoMdCloseCircleOutline className='closeModal'   onClick={closeModal}/>
       </div>
     </div>
   );
