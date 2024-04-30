@@ -24,7 +24,7 @@ useEffect(()=>{
   return (
     <div>
          <Navbar/>
-         <div style={{ display: "flex" }}>
+         <div className='cardsDiv'>
                   {stories && stories.map((cur , index) => {
                       return (
                         <div className="cardDiv" key={index} >
